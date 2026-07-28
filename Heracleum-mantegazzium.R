@@ -1,0 +1,43 @@
+# 1. Load packages
+library(tidyverse)
+library(ggplot2)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+
+#B2 Import the second dataset (Heracleum mantegazzianum)
+heracleum <- read_tsv("data/Heracleum.csv")
+dim(heracleum)
+glimpse(heracleum)
+head(heracleum)
+names(heracleum)
+
+# B3. Clean data (Heracleum mantegazzium)
+heracleum_clean <- heracleum %>% select(scientificName, decimalLatitude, decimalLongitude, year, basisOfRecord)
+dim(heracleum_clean)
+glimpse(heracleum_clean)
+colSums(is.na(heracleum_clean))
+summary(heracleum_clean$decimalLatitude)
+summary(heracleum_clean$decimalLongitude)
+range(heracleum_clean$decimalLatitude)
+range(heracleum_clean$decimalLongitude)
+heracleum_clean <- heracleum_clean %>% filter(!is.na(decimalLatitude), !is.na(decimalLongitude))
+dim(heracleum_clean)
+table(heracleum_clean$scientificName)
+table(heracleum_clean$basisOfRecord)
+summary(duplicated(heracleum_clean))
+heracleum_clean <- heracleum_clean %>% (distinct)
+summary(heracleum_clean$year)
+write_csv(heracleum_clean, "data/heracleum_clean.csv")
+
+# B4. Convert to spatial data (Heracleum mantegazzium)
+heracleum_sp <- heracleum_clean %>% st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = 4326)
+class(heracleum_sp)
+dim(heracleum_sp)
+
+# B5. Map
+Sweden <- ne_countries(country = "Sweden", scale = "medium", returnclass = "sf")
+class(Sweden)
+ggplot() + geom_sf(data = Sweden) + geom_sf(data = heracleum_sp, size = 0.7, alpha = 0.4) + labs(title = "Distribution of Heracleum mantegazzium in Sweden", subtitle = "GBIF occurrence records") + theme_classic()
+ggsave("figures/Heracleum_distribution_map.png", width = 8, height = 6, dpi = 300)
+
