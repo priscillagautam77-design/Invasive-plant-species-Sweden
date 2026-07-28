@@ -75,6 +75,8 @@ This project produced:
 
 Individual distribution maps for each species
 
+(figures/Impatiens_distribution_map.png)
+
 Combined distribution map
 
 Species richness grid map
