@@ -1,9 +1,9 @@
 # Distribution mapping and visualization of temporal patterns of Three invasive plant species in Sweden using GBIF data and R programming.
 # Overview
 
-The project compares the spatial distribution and temporal trends of three invasive plant species in Sweden using biodiversity occurrence records from the Global Biodiversity Information Facility (GBIF).
+The project compares the spatial distribution, species richness patterns and temporal trends of three invasive plant species in Sweden using biodiversity occurrence records from the Global Biodiversity Information Facility (GBIF). The analysis combines biodiversity data cleaning, GIS- based mapping, spatial grid analysis, and temporal visualization to explore where these species occur, where multiple invasive species overlap, and how recorded observations have changed over time.
 
-The analysis was conducted in R using reproducible data-cleaning and spatial analysis workflow.
+The analysis was conducted in R using reproducible methods for ecological data processing and spatial analysis workflow.
 
 # Research Question
 
